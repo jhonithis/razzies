@@ -3,6 +3,7 @@ package com.razzies.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -38,10 +39,10 @@ public class Movie implements Serializable{
 	@NotNull
 	private boolean winner;
 	
-	@OneToMany(mappedBy="movie")
+	@OneToMany(mappedBy="movie", cascade = CascadeType.ALL)
 	private List<Studio> studios;
 	
-	@OneToMany(mappedBy="movie")
+	@OneToMany(mappedBy="movie", cascade = CascadeType.ALL)
 	private List<Producer> producers;
 
 }

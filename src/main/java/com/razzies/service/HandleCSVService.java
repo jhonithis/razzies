@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.opencsv.bean.CsvToBeanBuilder;
 import com.razzies.dto.MovieCsv;
 import com.razzies.model.Movie;
+import com.razzies.model.Producer;
+import com.razzies.model.Studio;
 import com.razzies.repository.MovieRepository;
 
 import lombok.extern.java.Log;
@@ -25,6 +28,8 @@ import lombok.extern.java.Log;
 public class HandleCSVService {
 	
 	private static final String MOVIE_FILE_PATH = "csv/movielist.csv";
+	private static final String SEPARATOR_COMMA = ",";
+	private static final String SEPARATOR_AND = " and ";
 	
 	@Autowired
 	private MovieRepository movieRepository;
@@ -70,16 +75,51 @@ public class HandleCSVService {
 		List<Movie> movies = new ArrayList<Movie>(); 
 		
 		moviesCsv.forEach(movieCsv -> {
-			movies.add(
-				Movie.builder().
-					year(movieCsv.getYear()).
-					title(movieCsv.getTitle()).
-					winner(movieCsv.isWinner()).
-				build()
-			);
+			
+			Movie movie = Movie.builder().
+				year(movieCsv.getYear()).
+				title(movieCsv.getTitle()).
+				winner(movieCsv.isWinner()).
+				build();
+			
+			movie.setProducers(buildProducers(movie, movieCsv.getProducers()));
+			movie.setStudios(buildStudios(movie, movieCsv.getStudios()));
+			
+			movies.add(movie);
+			
 		});
 		
 		return movies;
+	}
+	
+	private List<Producer> buildProducers (Movie movie, String producersMovieCsv) {
+		List<Producer> producers = new ArrayList<Producer>();
+		Arrays.asList(
+			producersMovieCsv.replaceAll(SEPARATOR_AND, SEPARATOR_COMMA).split(SEPARATOR_COMMA)
+		).stream().forEach(produceCsv -> {
+			producers.add(
+				Producer.builder().
+				name(produceCsv).
+				movie(movie).
+				build()
+			);
+		});
+		return producers;
+	}
+	
+	private List<Studio> buildStudios (Movie movie, String studiosMovieCsv) {
+		List<Studio> studios = new ArrayList<Studio>();
+		Arrays.asList(
+			studiosMovieCsv.split(SEPARATOR_COMMA)
+		).stream().forEach(produceCsv -> {
+			studios.add(
+				Studio.builder().
+				name(produceCsv).
+				movie(movie).
+				build()
+			);
+		});
+		return studios;
 	}
 	
 	private Path getPathCsv() throws URISyntaxException {
