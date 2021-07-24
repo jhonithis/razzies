@@ -28,7 +28,7 @@ import lombok.extern.java.Log;
 public class HandleCSVService {
 	
 	private static final String MOVIE_FILE_PATH = "csv/movielist.csv";
-	private static final String SEPARATOR_COMMA = ",";
+	private static final String SEPARATOR_COMMA = ", ";
 	private static final String SEPARATOR_AND = " and ";
 	
 	@Autowired
