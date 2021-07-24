@@ -12,14 +12,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.opencsv.bean.CsvToBeanBuilder;
 import com.razzies.dto.MovieCsv;
 import com.razzies.model.Movie;
 import com.razzies.model.Producer;
 import com.razzies.model.Studio;
-import com.razzies.repository.MovieRepository;
 
 import lombok.extern.java.Log;
 
@@ -32,7 +30,7 @@ public class HandleCSVService {
 	private static final String SEPARATOR_AND = " and ";
 	
 	@Autowired
-	private MovieRepository movieRepository;
+	private MovieService movieService;
 
 	public void init() {
 		try {
@@ -43,7 +41,7 @@ public class HandleCSVService {
 				return;
 			}
 			
-			this.saveMovies(this.buildMovieByListMovieCsv(moviesCsv));
+			movieService.saveMovies(this.buildMovieByListMovieCsv(moviesCsv));
 		
 		} catch (Exception e) {
 			log.severe("Erro no processo de inserção do csv");
@@ -125,11 +123,6 @@ public class HandleCSVService {
 	private Path getPathCsv() throws URISyntaxException {
 		Path path = Paths.get(ClassLoader.getSystemResource(MOVIE_FILE_PATH).toURI());
 		return path;
-	}
-	
-	@Transactional
-	private void saveMovies(List<Movie> movies) throws Exception {
-		movies.forEach(movie -> movieRepository.save(movie));
 	}
 
 }
