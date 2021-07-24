@@ -1,13 +1,12 @@
 package com.razzies.model;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
@@ -21,27 +20,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Entity
-public class Movie implements Serializable{
+public class Producer implements Serializable{
 
-	private static final long serialVersionUID = 7014011614993525414L;
+	private static final long serialVersionUID = 8323579021507580212L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
 	@NotNull
-	private String title;
+	private String name;
 	
+	@ManyToOne
 	@NotNull
-	private int year;
-
-	@NotNull
-	private boolean winner;
-	
-	@OneToMany(mappedBy="movie")
-	private List<Studio> studios;
-	
-	@OneToMany(mappedBy="movie")
-	private List<Producer> producers;
+	private Movie movie;
 
 }
