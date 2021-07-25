@@ -25,6 +25,8 @@ public class Studio implements Serializable{
 	@NotNull
 	private Movie movie;
 	
+	public Studio(){}
+	
 	public Studio(@NotNull String name, @NotNull Movie movie) {
 		super();
 		this.name = name;

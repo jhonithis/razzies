@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Movie implements Serializable{
 
@@ -29,11 +31,15 @@ public class Movie implements Serializable{
 	@NotNull
 	private boolean winner;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="movie", cascade = CascadeType.ALL)
 	private List<Studio> studios;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="movie", cascade = CascadeType.ALL)
 	private List<Producer> producers;
+	
+	public Movie() {}
 
 	public Movie(@NotNull String title, @NotNull int year, @NotNull boolean winner) {
 		super();

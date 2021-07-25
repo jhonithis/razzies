@@ -25,6 +25,8 @@ public class Producer implements Serializable{
 	@NotNull
 	private Movie movie;
 	
+	public Producer() {}
+	
 	public Producer(@NotNull String name, @NotNull Movie movie) {
 		super();
 		this.name = name;
