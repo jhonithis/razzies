@@ -27,4 +27,8 @@ public class ProducerService {
 		return intervals;
 	}
 	
+	public List<ProducerProjection> getProducerWinner(){
+		return this.producerRepository.getProducerWinner();
+	}
+	
 }
