@@ -9,16 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
 @Entity
 public class Producer implements Serializable{
 
@@ -34,5 +24,27 @@ public class Producer implements Serializable{
 	@ManyToOne
 	@NotNull
 	private Movie movie;
+	
+	public Producer(@NotNull String name, @NotNull Movie movie) {
+		super();
+		this.name = name;
+		this.movie = movie;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Movie getMovie() {
+		return movie;
+	}
+
+	public void setMovie(Movie movie) {
+		this.movie = movie;
+	}
 
 }

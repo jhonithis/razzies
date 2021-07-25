@@ -11,16 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
 @Entity
 public class Movie implements Serializable{
 
@@ -44,5 +34,60 @@ public class Movie implements Serializable{
 	
 	@OneToMany(mappedBy="movie", cascade = CascadeType.ALL)
 	private List<Producer> producers;
+
+	public Movie(@NotNull String title, @NotNull int year, @NotNull boolean winner) {
+		super();
+		this.title = title;
+		this.year = year;
+		this.winner = winner;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public int getYear() {
+		return year;
+	}
+
+	public void setYear(int year) {
+		this.year = year;
+	}
+
+	public boolean isWinner() {
+		return winner;
+	}
+
+	public void setWinner(boolean winner) {
+		this.winner = winner;
+	}
+
+	public List<Studio> getStudios() {
+		return studios;
+	}
+
+	public void setStudios(List<Studio> studios) {
+		this.studios = studios;
+	}
+
+	public List<Producer> getProducers() {
+		return producers;
+	}
+
+	public void setProducers(List<Producer> producers) {
+		this.producers = producers;
+	}
 
 }

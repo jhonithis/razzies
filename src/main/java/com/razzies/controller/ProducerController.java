@@ -9,19 +9,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.razzies.model.Movie;
-import com.razzies.service.MovieService;
+import com.razzies.dto.Interval;
+import com.razzies.service.ProducerService;
 
 @RestController
-@RequestMapping("/api/movie")
-public class MovieController {
+@RequestMapping("/api/producer")
+public class ProducerController {
 
 	@Autowired
-	MovieService service;
+	ProducerService service;
 
-	@GetMapping("/")
-	public ResponseEntity<List<Movie>> getAll() {
-		return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
+	@GetMapping("/min-max-interval-award")
+	public ResponseEntity<List<Interval>> getMinMaxIntervalAward() {
+		return new ResponseEntity<>(service.getMinMaxIntervalAwardByProducer(), HttpStatus.OK);
 	}
 	
 }
