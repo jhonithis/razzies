@@ -37,12 +37,15 @@ exemplo, H2). Nenhuma instalação externa deve ser necessária;
 - O arquivo deve ter o nome movielist.csv;
 - O arquivo deve estar localizado em src/main/resources/csv/.
 
-##### Startar o sistema
+##### Inicializar o sistema
 - Iniciar o sistema pelo Spring Boot da IDE de sua preferência ou executar o comando a baixo dentro do diretorio inicial do projeto:
-
 ```
 mvn spring-boot:run
 ```
+- Sistema está disponível pelo tomcat na url localhost:8080/
+
+##### End point
+- Foi disponibilizado o endpoint [/api/producer/min-max-interval-award](http://localhost:8080//api/producer/min-max-interval-award) onde o retorno é o resultado do item *Requisito da Api*
 
 ##### Acesso ao Banco de dados
 - Banco de dados H2

@@ -1,7 +1,5 @@
 package com.razzies.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +18,7 @@ public class ProducerController {
 	ProducerService service;
 
 	@GetMapping("/min-max-interval-award")
-	public ResponseEntity<List<Interval>> getMinMaxIntervalAward() {
+	public ResponseEntity<Interval> getMinMaxIntervalAward() {
 		return new ResponseEntity<>(service.getMinMaxIntervalAwardByProducer(), HttpStatus.OK);
 	}
 	

@@ -24,8 +24,15 @@ class ProducerTests {
 	
 	@Test
 	void checkMinMaxIntervalAwardByProducer() {
-		List<Interval> intervals = producerService.getMinMaxIntervalAwardByProducer();
-		assertThat(intervals).isEmpty();
+		Interval intervals = producerService.getMinMaxIntervalAwardByProducer();
+		assertThat(intervals).isNotNull();
+		assertThat(intervals.getMax()).isNotEmpty();
+		assertThat(intervals.getMin()).isNotEmpty();
+		assertThat(intervals.getMax()).isNotNull();
+		assertThat(intervals.getMin()).isNotNull();
+		assertThat(intervals.getMax().size() > 0);
+		assertThat(intervals.getMin().size() > 0);
+		
 	}
 	
 	@Test
